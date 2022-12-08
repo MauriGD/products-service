@@ -1,4 +1,4 @@
-name: CICD Products-service
+name: CICD Products-service.
 
 on:
   push:
