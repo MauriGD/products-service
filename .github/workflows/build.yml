@@ -48,7 +48,14 @@ jobs:
       - name: Build with Maven
         run: |
             mvn -B package --file pom.xml
-            ls target
+            mkdir artifact && cp target/*.jar artifact
+            cd artifact && ls
+      - name: save artifact
+        uses: actions/upload-artifact@v2
+        with:
+        
+         name: github-action-artifact
+         path: artifact
       
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -60,7 +67,7 @@ jobs:
         
       - name: Docker Build and sent to Repo
         env:
-         IMAGE_TAG: ${{ github.sha }} 
+         IMAGE_TAG: latest
         run: | 
             ls target
             aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 083266080818.dkr.ecr.us-east-1.amazonaws.com
