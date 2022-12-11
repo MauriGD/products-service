@@ -74,7 +74,7 @@ jobs:
             docker build --build-arg JAR_FILE=target/products-service-example-0.0.1-SNAPSHOT.jar -t products-service .
             docker tag products-service:latest 083266080818.dkr.ecr.us-east-1.amazonaws.com/products-service:$IMAGE_TAG
             docker push 083266080818.dkr.ecr.us-east-1.amazonaws.com/products-service:$IMAGE_TAG
-            aws ecs describe-task-definition --task-definition products-service-task --query taskDefinition > task-definition.json
+            aws ecs describe-task-definition --task-definition products_service-task --query taskDefinition > task-definition.json
                         
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
